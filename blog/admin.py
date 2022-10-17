@@ -56,7 +56,7 @@ class UserAdmin(admin.ModelAdmin):
     
 from django.urls import reverse
 
-
+    
 class CommentAdmin(admin.ModelAdmin):
     list_display = ('name', 'email', 'post', 'created', 'active')
     list_filter = ('active', 'created', 'updated')
