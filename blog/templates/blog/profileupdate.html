@@ -1,0 +1,14 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+<h2 class="text-center text-dangermy-3">Edit profile</h2>
+<form method="POST" action="" novalidate enctype='multipart/form-data' >
+{% csrf_token %}
+{{form.as_p}}
+
+   
+<button type="submit" class="save btn btn-secondary my-4">Save</button>
+
+
+     
+</form>
+{% endblock content %}

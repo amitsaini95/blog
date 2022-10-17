@@ -1,0 +1,30 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+
+<form method = "post" enctype="multipart/form-data"> 
+  
+ <div class="row">
+    <div class="col-lg-6">
+<h2>username : {{user.username}}</h2>
+<h2>First name: {{user.first_name}}</h2>
+<h2>last name:{{user.last_name}}</h2>
+<h2>company:{{user.company}}</h2>
+<h2>state:{{user.state}}</h2>
+
+<h2>Email: {{user.email}}</h2>
+<h2>Gender:{{user.gender}}</h2>
+
+<div class="update-button" style="padding-top:50px;">
+
+<a href="{% url 'blog:profileupdate' %}" style="padding:10px;color:white;background-color:black;text-decoration:none;"  >update
+</a>
+</div>
+
+</div>
+<div class="col-lg-6 my-3">
+    <img src="{{user.profileimage.url}}" width="60%" height="400" >
+</div>
+</div>
+</form>
+
+{% endblock content %}

@@ -1,0 +1,15 @@
+
+li a {
+    color: green;
+}
+
+body{
+   background-image: url('/static/image/a1.jpg');
+   background-repeat: no-repeat;
+   background-position: center;
+   background-size:cover;
+   height: 100vh;
+}
+
+
+ 
