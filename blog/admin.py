@@ -52,11 +52,6 @@ class UserAdmin(admin.ModelAdmin):
        
     export_to_csv.short_description='Export as csv'
 
-
-    
-from django.urls import reverse
-
-    
 class CommentAdmin(admin.ModelAdmin):
     list_display = ('name', 'email', 'post', 'created', 'active')
     list_filter = ('active', 'created', 'updated')

@@ -3,6 +3,8 @@
 from asyncore import write
 from cgitb import reset
 import email
+import imp
+import json
 from pydoc import resolve
 from urllib import response
 from django.http import HttpResponseRedirect
@@ -11,7 +13,10 @@ from django.utils import timezone
 from .models import *
 from .forms import *
 from django.http import HttpResponse
+from django import views
 import csv
+
+from rest_framework.renderers import JSONRenderer
 # from django.views.generic import CreateView
 # from django.utils.text import slugify
 # from django.contrib.auth.models import User

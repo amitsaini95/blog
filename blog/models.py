@@ -1,6 +1,7 @@
 
 
 from distutils.command.upload import upload
+from statistics import mode
 
 
 from django.db import models
@@ -18,8 +19,7 @@ from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 
-class User(AbstractUser):
-    
+class User(AbstractUser): 
     email =models.EmailField(max_length=50)
     company =models.CharField(max_length=50)
     state = models.CharField(max_length= 40)
@@ -84,7 +84,7 @@ class Post(models.Model):
     featureimage=models.ImageField(upload_to='images',blank=True,null=True)
     tag = models.ManyToManyField(Tag, related_name='posts', blank=True)
     slug = models.SlugField(max_length=250,allow_unicode=True,null=True, blank=True, unique=True)
- 
+    
    
     def __str__(self):
         return self.title
