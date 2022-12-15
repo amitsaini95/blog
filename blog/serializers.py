@@ -57,11 +57,3 @@ class loginSerializers(serializers.ModelSerializer):
             if user is not None:
                 return user
             raise serializers.ValidationError({"detail":'Invalid username or password.'})
-    
-            
-
-
-         
-           
-                
-      
