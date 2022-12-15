@@ -1,16 +1,13 @@
 {% extends 'blog/base.html' %}
 {% load static %}
 {% block content %}
-
 <h3 class="text-center text-danger"> signup</h3>
-
 {% if messages %}
 {% for message in messages %}
 <p {% if message.tags %} class="alert alert-{{message.tags}} mb-5"
     {% endif %}>{{message}}</p>
 {% endfor %}
 {% endif %}
-
 <form method="POST" action="" enctype="multipart/form-data" novalidate> -
     {% csrf_token %}
     {% for fm in form %}
@@ -24,10 +21,7 @@
      <p class="alert alert-danger my-3">{{error}}</p>
      {% endfor %}
      {% endif %}
-  
 </form> 
-
-
 {% endblock content %}
 
      

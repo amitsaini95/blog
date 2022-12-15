@@ -1,9 +1,6 @@
 {% extends 'blog/base.html' %}
-
 {% block  content %}
-
             <h2 class="text-center text-danger">login</h2>
-           
             <form method="post" novalidate>
                 {% csrf_token %}
                 {% for fm in form %}
@@ -18,7 +15,4 @@
                  {% endfor %}
                  {% endif %}
             </form>
-                
-
-
 {% endblock %}     

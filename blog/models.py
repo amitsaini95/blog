@@ -1,48 +1,25 @@
-
-
-from distutils.command.upload import upload
-from statistics import mode
-
-
 from django.db import models
 from django.conf import settings
 from django.utils import timezone
 from django.utils.text import slugify
 from django.urls import reverse
-
-
 from django.contrib.auth.models import AbstractUser
-
-
-
-
-
-# Create your models here.
 
 class User(AbstractUser): 
     email =models.EmailField(max_length=50)
     company =models.CharField(max_length=50)
     state = models.CharField(max_length= 40)
     gender = models.CharField(max_length=20)
-    profileimage = models.ImageField(upload_to='images',blank=True)  
-
-
-
-
-    
+    profileimage = models.ImageField(upload_to='images')  
+ 
 class Tag(models.Model):
     tag_name = models.CharField(max_length=50, unique=True)
-  
     created_date = models.DateTimeField(default=timezone.now)
     published_date = models.DateTimeField(blank=True, null=True)
     slug = models.SlugField(max_length=250,allow_unicode=True , null=True, blank=True, unique=True)
- 
-
     class Meta:
         verbose_name = 'tag'
         verbose_name_plural = 'tags'
-
-
 
     def publish(self):
         self.published_date = timezone.now()
@@ -50,21 +27,16 @@ class Tag(models.Model):
 
     def __str__(self):
         return self.tag_name
-
-
+        
 class Category(models.Model):
     category_name = models.CharField(max_length=50, unique=True)
-    
     created_date = models.DateTimeField(default=timezone.now)
     published_date = models.DateTimeField(blank=True, null=True)
     slug = models.SlugField(max_length=250,allow_unicode=True , null=True, blank=True, unique=True)
- 
 
     class Meta:
         verbose_name = 'category'
         verbose_name_plural = 'categories'
-
-
 
     def publish(self):
         self.published_date = timezone.now()
@@ -85,7 +57,6 @@ class Post(models.Model):
     tag = models.ManyToManyField(Tag, related_name='posts', blank=True)
     slug = models.SlugField(max_length=250,allow_unicode=True,null=True, blank=True, unique=True)
     
-   
     def __str__(self):
         return self.title
 
@@ -102,9 +73,7 @@ class Post(models.Model):
         super().save(*args, **kwargs)
 
 class Comment(models.Model): 
-    post = models.ForeignKey(Post,
-                             on_delete=models.CASCADE,
-                             related_name='comments')
+    post = models.ForeignKey(Post,on_delete=models.CASCADE,related_name='comments')
     name = models.CharField(max_length=80) 
     email = models.EmailField() 
     body = models.TextField() 
@@ -120,6 +89,3 @@ class Comment(models.Model):
     
     def __str__(self):
         return 'Comment by {}'.format(self.name)
-
-
-    

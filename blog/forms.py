@@ -1,14 +1,10 @@
 from dataclasses import fields
 from re import I
-
 from django import forms
-
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
 from .models import *
 from django.contrib.auth import get_user_model
-# from django.contrib.auth.models import User
 from .models import Comment
-
 
 class PostForm(forms.ModelForm):
 
@@ -16,9 +12,6 @@ class PostForm(forms.ModelForm):
         model = Post
         fields = ('title', 'text','category','timage','featureimage','tag')
         
-
-
-
 class CategoryForm(forms.ModelForm):
 
     class Meta:
@@ -45,14 +38,12 @@ class UpdateProfile(forms.ModelForm):
     company =models.CharField(max_length=50)
     state = models.CharField(max_length= 40)
     gender = models.CharField(max_length=20)
-    profileimage = models.ImageField(upload_to='images',blank=True,default="job.png")  
+    profileimage = models.ImageField(upload_to='images/',default='/images/job.png')  
 
     class Meta:
         model = User
         fields = ('username', 'email', 'first_name', 'last_name','company','state','gender','profileimage')
 
-
-   
 class LoginForm(AuthenticationForm):
  
     username = forms.CharField(max_length=63)

@@ -1,14 +1,6 @@
-
 {% extends 'blog/base.html' %}
-
 {% block content %}
-
-
-
-
-
   <form method="POST">
-    
    {% csrf_token %}
    <div class="row mb-4">
     {% for posts in cat %}
@@ -21,16 +13,11 @@
             <time class="date">
                 {{ posts.published_date }}
             </time>
-           
             <h2 class="my-3"><a href="{% url 'blog:post_detail' slug=posts.slug %}">{{posts.title}}</a></h2>
             {% if posts.category %}
             category: <a href="{% url 'blog:category_detail' slug=posts.category %}"> {{posts.category}}</a>
            {% endif %}
-           <p>
-            {% if posts.tag %}
-            tags:
-            {% for posts in posts.tag.all %}
-            <a href="{% url 'blog:tag_detail'  slug=posts.slug %}"> {{posts.tag_name}},</a>
+           <p>{% if posts.tag %}tags:{% for posts in posts.tag.all %}<a href="{% url 'blog:tag_detail'  slug=posts.slug %}"> {{posts.tag_name}},</a>
              {% endfor %}
              {% endif %}
            </p>
@@ -38,8 +25,6 @@
         </div>
         </div>
         </div>
-    
-
  {% endfor %}
  </div>
  </form>

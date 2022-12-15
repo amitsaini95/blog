@@ -6,17 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-  
 <body>
-    
-
 {% extends 'blog/base.html' %}
-
 {% block content %}
-
     <article class="post">
         <aside class="actions ">
-         
             <a href="{% url 'blog:post_edit' posts.slug %}"  class="btn btn-secondary">
                 <i class="bi bi-pencil-fill" ></i>
             </a>
@@ -47,23 +41,16 @@
          {% endif %}
        </p>
        <p>  <img src="{{user.profileimage.url}}" width="60" height="60" style="border-radius:50%"><a href="{% url 'blog:user_profile' %}" class="text-decoration-none"><span class="ms-2 text-dark text-capitalize">{{user.first_name}}</span></a></p>
-       
     </article>
     <article>
    <p class="text-danger fs-4">  comments: <small class="text-dark fs-4">{{comments.count}}</small></p>
-
-
 <!-- Comment with nested comments -->
 {% for comment in comments %}
     <div class="comment my-3">
-        <p class="info">{{ comment.name }}: {{ comment.body }}  <small style="float:right">{{ comment.created }} </small></p>
-           
-
+        <p class="info">{{ comment.name }}: {{ comment.body }}  <small style="float:right">{{ comment.created }} </small></p>   
         {% for replay in comment.replies.all %}
             <p class="ms-4">{{ replay.name }}: {{ replay.body }}   <small style="float:right">{{ replay.created }}</small></p>
-         
         {% endfor %}
-
         <button class="btn btn-primary reply">Reply</button>
         <form action="." method="post" class="form1 my-4">
             {{ comment_form.as_p }}
@@ -77,18 +64,11 @@
 <h4>There are no comments yet.</h4>
 {% endfor %}
     </article>
- 
     <form action="." method="post" class="my-3">
         {{ comment_form.as_p }}
         {% csrf_token %}
         <button type="submit" class="btn btn-danger">Add comment</button>
     </form>
-   
 {% endblock %}
-
-
- 
 </body>
-
-
 </html>
