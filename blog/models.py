@@ -5,6 +5,7 @@ from django.utils.text import slugify
 from django.urls import reverse
 from django.contrib.auth.models import AbstractUser
 
+
 class User(AbstractUser): 
     email =models.EmailField(max_length=50)
     company =models.CharField(max_length=50)
@@ -30,9 +31,9 @@ class Tag(models.Model):
         
 class Category(models.Model):
     category_name = models.CharField(max_length=50, unique=True)
-    created_date = models.DateTimeField(default=timezone.now)
-    published_date = models.DateTimeField(blank=True, null=True)
-    slug = models.SlugField(max_length=250,allow_unicode=True , null=True, blank=True, unique=True)
+    created_date = models.DateTimeField(default=timezone.now())
+    published_date = models.DateTimeField(default=timezone.now())
+    slug = models.SlugField(max_length=250,allow_unicode=True ,unique=True)
 
     class Meta:
         verbose_name = 'category'
@@ -50,13 +51,13 @@ class Post(models.Model):
     title = models.CharField(max_length=200)
     text = models.TextField()
     created_date = models.DateTimeField(default=timezone.now)
-    timage=models.ImageField(upload_to='images1',blank=True,null=True)
-    published_date = models.DateTimeField(blank=True, null=True)
+    timage=models.ImageField(upload_to='images1')
+    published_date = models.DateTimeField(default=timezone.now)
     category = models.ForeignKey(Category,on_delete=models.CASCADE ,related_name="posts")
-    featureimage=models.ImageField(upload_to='images',blank=True,null=True)
-    tag = models.ManyToManyField(Tag, related_name='posts', blank=True)
+    featureimage=models.ImageField(upload_to='images')
+    tag = models.ManyToManyField(Tag,related_name="posts",blank=True)
     slug = models.SlugField(max_length=250,allow_unicode=True,null=True, blank=True, unique=True)
-    
+   
     def __str__(self):
         return self.title
 
@@ -89,3 +90,4 @@ class Comment(models.Model):
     
     def __str__(self):
         return 'Comment by {}'.format(self.name)
+    

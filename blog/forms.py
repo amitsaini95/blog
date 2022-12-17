@@ -10,19 +10,19 @@ class PostForm(forms.ModelForm):
 
     class Meta:
         model = Post
-        fields = ('title', 'text','category','timage','featureimage','tag')
+        fields = ('title', 'text','category','timage','featureimage','category','tag')
         
 class CategoryForm(forms.ModelForm):
 
     class Meta:
         model = Category
-        fields = ('category_name', )
+        fields = ('__all__')
 
 class TagForm(forms.ModelForm):
 
     class Meta:
         model =Tag
-        fields = ('tag_name',)
+        fields = ('__all__')
 
 
 class UserRegistraionForm(UserCreationForm):

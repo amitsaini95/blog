@@ -6,15 +6,15 @@ from .models import *
 import csv
 
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('author','title','text','timage','featureimage')
-    list_filter = ('author', 'title', 'text','timage','featureimage')
+    list_display = ('author','title','text','timage','featureimage',)
+    list_filter = ('author', 'title', 'text','timage','featureimage',)
     search_fields = ('title',)
   
 class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('category_name',)}
-    list_display = ('category_name', 'slug')
-    search_fields=('category_name','slug')
-    list_filter=('category_name','slug')
+    list_display = ('category_name', 'slug',)
+    search_fields=('category_name','slug',)
+    list_filter=('category_name','slug',)
 
 class TagAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('tag_name',)}
