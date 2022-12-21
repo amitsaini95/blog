@@ -15,7 +15,7 @@ class User(AbstractUser):
  
 class Tag(models.Model):
     tag_name = models.CharField(max_length=50, unique=True)
-    created_date = models.DateTimeField(default=timezone.now)
+    created_date = models.DateTimeField(default=timezone.now())
     published_date = models.DateTimeField(blank=True, null=True)
     slug = models.SlugField(max_length=250,allow_unicode=True , null=True, blank=True, unique=True)
     class Meta:
@@ -30,11 +30,11 @@ class Tag(models.Model):
         return self.tag_name
         
 class Category(models.Model):
-    category_name = models.CharField(max_length=50, unique=True)
+    category_name = models.CharField(max_length=50,unique=True)
     created_date = models.DateTimeField(default=timezone.now())
-    published_date = models.DateTimeField(default=timezone.now())
-    slug = models.SlugField(max_length=250,allow_unicode=True ,unique=True)
-
+    published_date = models.DateTimeField( null=True, blank=True)
+    slug = models.SlugField(max_length=250,allow_unicode=True ,unique=True, null=True, blank=True)
+    
     class Meta:
         verbose_name = 'category'
         verbose_name_plural = 'categories'
@@ -53,7 +53,7 @@ class Post(models.Model):
     created_date = models.DateTimeField(default=timezone.now)
     timage=models.ImageField(upload_to='images1')
     published_date = models.DateTimeField(default=timezone.now)
-    category = models.ForeignKey(Category,on_delete=models.CASCADE ,related_name="posts")
+    category = models.ForeignKey(Category,on_delete=models.CASCADE,related_name="posts",blank=True)
     featureimage=models.ImageField(upload_to='images')
     tag = models.ManyToManyField(Tag,related_name="posts",blank=True)
     slug = models.SlugField(max_length=250,allow_unicode=True,null=True, blank=True, unique=True)

@@ -9,9 +9,7 @@ from django.contrib import messages
 from .forms import UserRegistraionForm,LoginForm,CommentForm
 
 def post_list(request):
-    # posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
     posts = Post.objects.all()
-    print(posts)
     return render(request, 'blog/post_list.html',{'posts':posts})
       
 def post_edit(request,slug):

@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from .models import *
 from django.contrib.auth import authenticate
-
+from django.shortcuts import get_object_or_404
 from rest_framework.authtoken.models import Token 
 
 class signupSerializers(serializers.ModelSerializer):
@@ -9,9 +9,7 @@ class signupSerializers(serializers.ModelSerializer):
         model=User
         fields=('username','password','first_name','last_name','email','company','state','gender','profileimage')
         extra_kwargs={
-            'password':{'required':True,'style':{'input_type':'password'
-                
-            }}
+            'password':{'required':True,'style':{'input_type':'password'}}
         }
     def to_representation(self, instance):
             serializer = userSerializers(instance=instance)
@@ -29,51 +27,47 @@ class userSerializers(serializers.ModelSerializer):
     def get_token(self, obj):
             token = Token.objects.get_or_create(user=obj)
             return token.key
-
-
-     
-# class tagSerializers(serializers.ModelSerializer):
-#     class Meta:
-#         model=Tag
-#         fields=('__all__')
-        
-
-# class commentSerializers(serializers.ModelSerializer):
-#     class Meta:
-#         model=Comment
-#         fields=('__all__')  
-                    
-# class categorySerializers(serializers.ModelSerializer):
-
-#     class Meta:
-#         model=Category
-#         fields=('__all__')
-
-        
-class postSerializers(serializers.ModelSerializer):
+class commentSerializers(serializers.ModelSerializer):
+    
+    class Meta:
+        model=Comment
+        fields='__all__'
  
+class categroySerializers(serializers.ModelSerializer):
+    class Meta:
+        model=Category
+        fields='__all__'
+        
+class tagSerializers(serializers.ModelSerializer):
+    class Meta:
+        model=Tag
+        fields='__all__'
+        
+
+        
+class postSerializers(serializers.ModelSerializer): 
     class Meta:
         
         model=Post
-        fields = "__all__"
+        fields =('__all__')
         
     def to_representation(self, instance):
         rep = super(postSerializers, self).to_representation(instance)
-        rep['category'] = instance.category.category_name
+        cat=categroySerializers(Category.objects.get(id=instance.category.id))
+        rep['category']=cat.data
         tagList = []
         for i in instance.tag.all():
-            tagList.append(i.tag_name)
+            tagList.append({'id':i.id,'tag':i.tag_name,'slug':i.slug,'created_date':i.created_date, 'published_date':i.published_date})
         rep['tag'] = tagList
         commentList = []
         for i in instance.comments.all():
-            commentList.append({'name':i.name, 'email':i.email, 'body':i.body, 'created':i.created,'updated':i.updated,'active':i.active,})
+            commentList.append({'id':i.id,'name':i.name, 'email':i.email, 'body':i.body,'created':i.created,'updated':i.updated,'active':i.active,'parent':i.parent_id,'post':i.post_id})
         rep['comment'] = commentList
-      
         rep['author'] = instance.author.first_name
         return rep
-
   
-      
+
+
 class loginSerializers(serializers.ModelSerializer):
     class Meta:
         model=User

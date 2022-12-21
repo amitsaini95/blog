@@ -12,9 +12,9 @@ class PostAdmin(admin.ModelAdmin):
   
 class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('category_name',)}
-    list_display = ('category_name', 'slug',)
-    search_fields=('category_name','slug',)
-    list_filter=('category_name','slug',)
+    list_display = ('category_name', 'slug')
+    search_fields=('category_name','slug')
+    list_filter=('category_name','slug')
 
 class TagAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('tag_name',)}
