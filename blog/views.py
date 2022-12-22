@@ -129,8 +129,3 @@ def tag_detail(request,slug):
     tagdetails= get_object_or_404(Tag,slug=slug)
     post=Post.objects.filter(tag=tagdetails)
     return render(request, 'blog/tag_detail.html',{'cat':post})
-
-
-
-
-

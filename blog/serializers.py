@@ -8,9 +8,8 @@ class signupSerializers(serializers.ModelSerializer):
     class Meta:
         model=User
         fields=('username','password','first_name','last_name','email','company','state','gender','profileimage')
-        extra_kwargs={
-            'password':{'required':True,'style':{'input_type':'password'}}
-        }
+     
+        
     def to_representation(self, instance):
             serializer = userSerializers(instance=instance)
             return serializer.data
@@ -27,12 +26,13 @@ class userSerializers(serializers.ModelSerializer):
     def get_token(self, obj):
             token = Token.objects.get_or_create(user=obj)
             return token.key
+        
 class commentSerializers(serializers.ModelSerializer):
     
     class Meta:
         model=Comment
-        fields='__all__'
- 
+        fields=('__all__')
+
 class categroySerializers(serializers.ModelSerializer):
     class Meta:
         model=Category
@@ -41,10 +41,8 @@ class categroySerializers(serializers.ModelSerializer):
 class tagSerializers(serializers.ModelSerializer):
     class Meta:
         model=Tag
-        fields='__all__'
-        
-
-        
+        fields='__all__'     
+           
 class postSerializers(serializers.ModelSerializer): 
     class Meta:
         
@@ -66,8 +64,6 @@ class postSerializers(serializers.ModelSerializer):
         rep['author'] = instance.author.first_name
         return rep
   
-
-
 class loginSerializers(serializers.ModelSerializer):
     class Meta:
         model=User
