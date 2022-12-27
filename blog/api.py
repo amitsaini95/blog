@@ -1,8 +1,9 @@
-from .serializers import userSerializers,postSerializers,loginSerializers,signupSerializers,tagSerializers,categroySerializers,commentSerializers
-from .models import Category, Post, Tag, User,Category,Comment
+from .serializers import  *
+from .models import *
 from rest_framework import viewsets
 from rest_framework.permissions import AllowAny
 from . import serializers
+
 class userlist(viewsets.ModelViewSet):
        queryset=User.objects.all()
        serializer_class=userSerializers
@@ -23,7 +24,7 @@ class taglist(viewsets.ModelViewSet):
 class signuplist(viewsets.ModelViewSet):
       queryset=User.objects.all()
       serializer_class=signupSerializers
-      http_method_names=['post','get']
+      http_method_names=['get','post']
       
 class loginlist(viewsets.ModelViewSet):
       queryset = User.objects.all()
@@ -32,8 +33,7 @@ class loginlist(viewsets.ModelViewSet):
       permission_classes=((AllowAny,))
       
 class commentlist(viewsets.ModelViewSet):
-      queryset=Comment.objects.all()
+      queryset=Comment.objects.filter(parent__isnull=True)
       serializer_class=commentSerializers
-      
 
-
+    

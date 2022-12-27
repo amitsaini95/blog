@@ -10,6 +10,11 @@ class PostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ('title', 'text','timage','featureimage','category','tag',)
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = '__all__'
         
 class CategoryForm(forms.ModelForm):
     class Meta:
@@ -43,8 +48,3 @@ class UpdateProfile(forms.ModelForm):
 class LoginForm(AuthenticationForm):
     username = forms.CharField(max_length=63)
     password = forms.CharField(max_length=63, widget=forms.PasswordInput)
-
-class CommentForm(forms.ModelForm):
-    class Meta:
-        model = Comment
-        fields = ('name', 'email', 'body',)

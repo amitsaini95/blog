@@ -1,9 +1,8 @@
 from rest_framework import serializers
 from .models import *
 from django.contrib.auth import authenticate
-from django.shortcuts import get_object_or_404
 from rest_framework.authtoken.models import Token 
-
+      
 class signupSerializers(serializers.ModelSerializer):
     class Meta:
         model=User
@@ -27,12 +26,22 @@ class userSerializers(serializers.ModelSerializer):
             token = Token.objects.get_or_create(user=obj)
             return token.key
         
+
 class commentSerializers(serializers.ModelSerializer):
-    
+
     class Meta:
         model=Comment
-        fields=('__all__')
-
+        fields=('id','name','email','body','created','updated','active','post','parent') 
+    
+    def to_representation(self, obj):
+        rep = super(commentSerializers, self).to_representation(obj)
+        cat=Comment.objects.filter(parent=obj.id)
+        catlists=[]
+        for i in cat:
+         catlists.append({'id':i.id,'name':i.name,'email':i.email,'body':i.body,'created':i.created,'updated':i.updated,'post':i.post_id,'parent':i.parent_id})
+        rep['replies']=catlists
+        return rep
+        
 class categroySerializers(serializers.ModelSerializer):
     class Meta:
         model=Category
@@ -82,3 +91,4 @@ class loginSerializers(serializers.ModelSerializer):
             if user is not None:
                 return user
             raise serializers.ValidationError({"detail":'Invalid username or password.'})
+     
