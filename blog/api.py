@@ -35,5 +35,6 @@ class loginlist(viewsets.ModelViewSet):
 class commentlist(viewsets.ModelViewSet):
       queryset=Comment.objects.filter(parent__isnull=True)
       serializer_class=commentSerializers
+      
 
     
