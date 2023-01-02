@@ -90,4 +90,9 @@ class Comment(models.Model):
     
     def __str__(self):
         return 'Comment by {}'.format(self.name)
+class Ip(models.Model):
+    Ip_address=models.CharField(max_length=50)
     
+def __str__(self):
+    return self.Ip_address
+  

@@ -1,8 +1,8 @@
-from .serializers import  *
-from .models import *
 from rest_framework import viewsets
 from rest_framework.permissions import AllowAny
-from . import serializers
+from .serializers import  *
+from .models import *
+
 
 class userlist(viewsets.ModelViewSet):
        queryset=User.objects.all()
@@ -12,6 +12,7 @@ class userlist(viewsets.ModelViewSet):
 class postlist(viewsets.ModelViewSet):
        queryset=Post.objects.all()
        serializer_class=postSerializers
+       
         
 class categorylist(viewsets.ModelViewSet):
       queryset=Category.objects.all()

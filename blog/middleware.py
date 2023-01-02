@@ -1,16 +1,14 @@
-from django.shortcuts import HttpResponse,render
+from django.shortcuts import HttpResponse
+from .models import *
 class my_middlewares:
     def __init__(self,get_response):
-        self.get_response=get_response 
-    
-
-         
+        self.get_response=get_response
+ 
     def __call__(self,request):
-        x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
-        if x_forwarded_for:
-            return render(request,'blog/post_list.html')
-            
+        host=request.META['HTTP_HOST']
+        ip=Ip.objects.filter(Ip_address=host[:-5])
+        if ip:
+            response=self.get_response(request)
+            return response
         else:
-         response= HttpResponse("<h1>invalid ip address</h1>")
-         return response
-  
+            return HttpResponse("<h1>invalid ip address</h1>")

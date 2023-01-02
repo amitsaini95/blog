@@ -17,7 +17,7 @@
         </aside>
         {% if posts.published_date %}
             <time class="date">
-                {{ posts.published_date }}
+             {{ posts.published_date }}
             </time>
         {% endif %}
         <div class="dflex my-3" style="display:flex;gap:20px">
@@ -43,26 +43,26 @@
        <p>  <img src="{{user.profileimage.url}}" width="60" height="60" style="border-radius:50%"><a href="{% url 'blog:user_profile' %}" class="text-decoration-none"><span class="ms-2 text-dark text-capitalize">{{user.first_name}}</span></a></p>
     </article>
     <article>
-   <p class="text-danger fs-4">  comments: <small class="text-dark fs-4">{{comments.count}}</small></p>
-<!-- Comment with nested comments -->
-{% for comment in comments %}
-    <div class="comment my-3">
-        <p class="info">{{ comment.name }}: {{ comment.body }}  <small style="float:right">{{ comment.created }} </small></p>   
-        {% for replay in comment.replies.all %}
-            <p class="ms-4">{{ replay.name }}: {{ replay.body }}   <small style="float:right">{{ replay.created }}</small></p>
+        <p class="text-danger fs-4">  comments: <small class="text-dark fs-4">{{comments.count}}</small></p>
+        <!-- Comment with nested comments -->
+        {% for comment in comments %}
+            <div class="comment my-3">
+                <p class="info">{{ comment.name }}: {{ comment.body }}  <small style="float:right">{{ comment.created }} </small></p>   
+                {% for replay in comment.replies.all %}
+                    <p class="ms-4">{{ replay.name }}: {{ replay.body }}   <small style="float:right">{{ replay.created }}</small></p>
+                {% endfor %}
+                <button class="btn btn-primary reply">Reply</button>
+                <form action="." method="post" class="form1 my-4">
+                    {{ comment_form.as_p }}
+                    {% csrf_token %}
+                    <!-- Hidden input for parent comment.id -->
+                    <input type="hidden" name="parent_id" value="{{ comment.id }}">
+                    <input class="btn btn-primary" type="submit" value=" submit your Replay">
+                </form>
+            </div>
+            {% empty %}
+            <h4>There are no comments yet.</h4>
         {% endfor %}
-        <button class="btn btn-primary reply">Reply</button>
-        <form action="." method="post" class="form1 my-4">
-            {{ comment_form.as_p }}
-            {% csrf_token %}
-            <!-- Hidden input for parent comment.id -->
-            <input type="hidden" name="parent_id" value="{{ comment.id }}">
-            <input class="btn btn-primary" type="submit" value=" submit your Replay">
-        </form>
-    </div>
-{% empty %}
-<h4>There are no comments yet.</h4>
-{% endfor %}
     </article>
     <form action="." method="post" class="my-3">
         {{ comment_form.as_p }}

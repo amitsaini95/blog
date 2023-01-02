@@ -1,7 +1,7 @@
-from rest_framework import serializers
-from .models import *
 from django.contrib.auth import authenticate
 from rest_framework.authtoken.models import Token 
+from rest_framework import serializers
+from .models import *
       
 class signupSerializers(serializers.ModelSerializer):
     class Meta:
@@ -56,7 +56,7 @@ class postSerializers(serializers.ModelSerializer):
     class Meta:
         
         model=Post
-        fields =('__all__')
+        fields ='__all__'
         
     def to_representation(self, instance):
         rep = super(postSerializers, self).to_representation(instance)

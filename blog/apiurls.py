@@ -1,7 +1,7 @@
 from django.urls import path,include
+from rest_framework.routers import DefaultRouter
 from . import api
 from .views import *
-from rest_framework.routers import DefaultRouter
 router=DefaultRouter()
 router.register('users',api.userlist,basename="userlist")
 router.register('posts',api.postlist,basename="postlist")

@@ -1,10 +1,8 @@
-from dataclasses import fields
-from re import I
 from django import forms
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
-from .models import *
-from django.contrib.auth import get_user_model
 from .models import Comment
+from .models import *
+
 
 class PostForm(forms.ModelForm):
     class Meta:

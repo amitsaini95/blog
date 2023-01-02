@@ -29,7 +29,9 @@ SECRET_KEY = 'django-insecure-aggemayl8c-5wfs^^#wx+k+ckd#u=18d80zfaros@u9)k6-&-y
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG =True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+
+# CORS_ORIGIN_ALLOW_ALL = True
 
 # Base url to serve media files  
 
@@ -52,8 +54,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog',
     'polls',
-    'rest_framework'
-   
+    'rest_framework',
+    # 'corsheaders',  
 ]
 
 MIDDLEWARE = [
@@ -64,8 +66,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'blog.middleware.my_middlewares',
-    
+    # 'corsheaders.middleware.CorsMiddleware',
+    # 'blog.middleware.my_middlewares',
 ]
 
 ROOT_URLCONF = 'newapp.urls'

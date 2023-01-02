@@ -1,6 +1,5 @@
 from django.contrib import admin
 from django.http import HttpResponse
-from blog import views
 from .forms import *
 from .models import *
 import csv
@@ -42,11 +41,15 @@ class CommentAdmin(admin.ModelAdmin):
     list_display = ('name', 'email', 'post', 'created', 'active')
     list_filter = ('active', 'created', 'updated')
     search_fields = ('name', 'email', 'body')
+class IpAdmin(admin.ModelAdmin):
+    list_display=('Ip_address',)
+  
 
 admin.site.register(Post,PostAdmin)
 admin.site.register(Category,CategoryAdmin)
 admin.site.register(Tag,TagAdmin)
 admin.site.register(User,UserAdmin)
 admin.site.register(Comment,CommentAdmin)
+admin.site.register(Ip,IpAdmin)
 
 

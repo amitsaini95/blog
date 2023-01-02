@@ -1,12 +1,12 @@
 
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect,HttpResponse
 from django.shortcuts import render,redirect,get_object_or_404
-from django.utils import timezone
-from .models import *
-from .forms import *
 from django.contrib.auth  import authenticate, login,logout
 from django.contrib import messages
+from django.utils import timezone
 from .forms import UserRegistraionForm,LoginForm,CommentForm
+from .models import *
+from .forms import *
 
 def post_list(request):
     posts = Post.objects.all()
@@ -34,8 +34,7 @@ def post_new(request):
             post.author = request.user
             post.published_date = timezone.now()
             post.save()
-            return redirect('/',slug=post.slug)
-         
+            return redirect('/',slug=post.slug)   
     else:
         form = PostForm()
     return render(request, 'blog/post_edit.html', {'form': form})
@@ -104,7 +103,7 @@ def user_login(request):
     return  render(request,'blog/login.html',{'form':form})
 
 def user_profile(request):
-     return render(request,'blog/profile.html',{})
+     return render(request,'blog/profile.html')
 
 def user_logout(request):
     logout(request)
